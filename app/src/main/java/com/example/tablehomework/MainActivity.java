@@ -17,8 +17,7 @@ import android.view.View;
 import com.example.tablehomework.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-
-
+    
     private ActivityMainBinding binding;
 
     @Override

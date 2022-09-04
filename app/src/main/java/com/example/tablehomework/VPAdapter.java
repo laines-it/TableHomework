@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class VPAdapter extends FragmentPagerAdapter {
 
     private final ArrayList<String> titles = new ArrayList<>();
+    private final int[] TITLES = {R.string.tab_text_1,R.string.tab_text_2,R.string.tab_text_3};
     private final ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
     public VPAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
@@ -35,6 +36,6 @@ public class VPAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position){
-        return super.getPageTitle(position);
+        return titles.get(position);
     }
 }

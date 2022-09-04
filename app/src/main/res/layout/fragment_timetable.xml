@@ -5,9 +5,175 @@
     android:layout_height="match_parent"
     tools:context=".timetable_fragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="this is timetable" />
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="10">
+        <TableRow>
+
+            <TextView
+                android:text="Понедельник"
+                android:padding="3dip"
+                android:textSize="20sp"/>
+        </TableRow>
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+                <TableRow>
+                    <TextView android:text="08:45 - 10:20" />
+                    <TextView android:text="Лин. алгебра (сем)" />
+                    <TextView android:text="786" android:gravity="start" />
+                </TableRow>
+                <TableRow>
+                    <TextView android:text="10:30 - 12:05" />
+                    <TextView android:text="Безопасность жизнед." />
+                    <TextView android:text="614" android:gravity="start" />
+                </TableRow>
+                <TableRow>
+                    <TextView android:text="12:50 - 14:25" />
+                    <TextView android:text="Мат. анализ (лекция)" />
+                    <TextView android:text="П - 6" android:gravity="start" />
+                </TableRow>
+                <TableRow>
+                    <TextView android:text="15:25 - 17:15" />
+                    <TextView android:text="Физ. культура" />
+                    <TextView android:text="" android:gravity="start" />
+                </TableRow>
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+        <TableRow>
+
+            <TextView
+                android:text="Вторник"
+                android:padding="3dip"
+                android:textSize="20sp"/>
+        </TableRow>
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+        <TableRow>
+            <TextView android:text="08:45 - 10:20" />
+            <TextView android:text="Алгоритмы (лекция)" />
+            <TextView android:text="786" android:gravity="start" />
+        </TableRow>
+        <TableRow>
+            <TextView android:text="10:30 - 12:05" />
+            <TextView android:text="Лин. алгебра (лекция)" />
+            <TextView android:text="П - 14" android:gravity="start" />
+        </TableRow>
+        <TableRow>
+            <TextView android:text="12:50 - 14:25" />
+            <TextView android:text="Практикум на ЭВМ" />
+            <TextView android:text="МЗ-1/2" android:gravity="start" />
+        </TableRow>
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+        <TableRow>
+
+            <TextView
+                android:text="Среда"
+                android:padding="3dip"
+                android:textSize="20sp"/>
+        </TableRow>
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+        <TableRow>
+            <TextView android:text="08:45 - 10:20" />
+            <TextView android:text="Практикум на ЭВМ" />
+            <TextView android:text="580" android:gravity="start" />
+        </TableRow>
+        <TableRow>
+            <TextView android:text="10:30 - 12:05" />
+            <TextView android:text="Мат. анализ (сем)" />
+            <TextView android:text="613" android:gravity="start" />
+        </TableRow>
+        <TableRow>
+            <TextView android:text="12:50 - 14:25" />
+            <TextView android:text="Мат. Анализ (лекция)" />
+            <TextView android:text="П - 6" android:gravity="start" />
+        </TableRow>
+        <TableRow>
+            <TextView android:text="15:10 - 18:50" />
+            <TextView android:text="Межфакультетские курсы" />
+            <TextView android:text="" android:gravity="start" />
+        </TableRow>
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+        <TableRow>
+
+            <TextView
+                android:text="Четверг"
+                android:padding="3dip"
+                android:textSize="20sp"/>
+        </TableRow>
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+        <TableRow>
+            <TextView android:text="08:45 - 10:20" />
+            <TextView android:text="Алгоритмы (лекция)" />
+            <TextView android:text="П - 14" android:gravity="start" />
+        </TableRow>
+        <TableRow>
+            <TextView android:text="10:30 - 12:05" />
+            <TextView android:text="Лин. алгебра (лекция)" />
+            <TextView android:text="П - 14" android:gravity="start" />
+        </TableRow>
+        <TableRow>
+            <TextView android:text="12:50 - 14:25" />
+            <TextView android:text="История (сем)" />
+            <TextView android:text="505" android:gravity="start" />
+        </TableRow>
+        <TableRow>
+            <TextView android:text="14:35 - 16:10" />
+            <TextView android:text="Лин. алгебра (сем)" />
+            <TextView android:text="785" android:gravity="start" />
+        </TableRow>
+        <TableRow>
+            <TextView android:text="16:20 - 17:55" />
+            <TextView android:text="История (лекция) (четные)" />
+            <TextView android:text="П - 14" android:gravity="start" />
+        </TableRow>
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+        <TableRow>
+
+            <TextView
+                android:text="Пятница"
+                android:padding="3dip"
+                android:textSize="20sp"/>
+        </TableRow>
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+        <TableRow>
+            <TextView android:text="08:45 - 10:20" />
+            <TextView android:text="Физ. культура" />
+            <TextView android:text="" android:gravity="start" />
+        </TableRow>
+        <TableRow>
+            <TextView android:text="10:30 - 12:05" />
+            <TextView android:text="Английский язык" />
+            <TextView android:text="785 / 786" android:gravity="start" />
+        </TableRow>
+        <TableRow>
+            <TextView android:text="12:50 - 14:25" />
+            <TextView android:text="Английский язык" />
+            <TextView android:text="785 / 786" android:gravity="start" />
+        </TableRow>
+        <TableRow>
+            <TextView android:text="14:35 - 16:10" />
+            <TextView android:text="Мат. анализ" />
+            <TextView android:text="780" android:gravity="start" />
+        </TableRow>
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+
+    </TableLayout>
 </androidx.core.widget.NestedScrollView>
