@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "527121999345",
+    "project_id": "vmktable",
+    "storage_bucket": "vmktable.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527121999345:android:6474ebb78bc7add8135050",
+        "android_client_info": {
+          "package_name": "com.example.tablehomework"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527121999345-hns15jvjs7iodfll01754t6jdjb6apne.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tablehomework",
+            "certificate_hash": "34ee7815e5364d2a8608d42b408d131475994bcf"
+          }
+        },
+        {
+          "client_id": "527121999345-cohnjsnlirj1cjpo9gmotp88b4pleet1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvyyir75sT2Y8dN8FX3HeuDKZVyGL6_VM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527121999345-cohnjsnlirj1cjpo9gmotp88b4pleet1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
