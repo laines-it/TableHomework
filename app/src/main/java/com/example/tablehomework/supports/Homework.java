@@ -1,4 +1,4 @@
-package com.example.tablehomework;
+package com.example.tablehomework.supports;
 
 public class Homework {
     public String date;

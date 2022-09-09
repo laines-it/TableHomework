@@ -4,4 +4,12 @@
     <string name="tab_text_2">Расписание</string>
     <string name="tab_text_3">Изменить</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="subjects">
+        <item>"Математический анализ (сем)"</item>
+        <item>"Алгебра и геометрия (сем)"</item>
+        <item>"Практикум на ЭВМ"</item>
+        <item>"История"</item>
+        <item>"Английский"</item>
+        <item>"Безопасность жизнедеятельности"</item>
+    </string-array>
 </resources>
