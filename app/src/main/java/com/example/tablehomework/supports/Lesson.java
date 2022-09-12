@@ -6,10 +6,10 @@ public class Lesson{
     public String subject;
     public String time;
     public String room;
-    public List<String> homework;
+    public String homework;
 
     public Lesson(){}
-    public Lesson(String subject, String time, String room, List<String> homework) {
+    public Lesson(String subject, String time, String room, String homework) {
         this.subject = subject;
         this.time = time;
         this.room = room;
@@ -40,11 +40,11 @@ public class Lesson{
         this.room = room;
     }
 
-    public List<String> getHomework() {
+    public String getHomework() {
         return homework;
     }
 
-    public void setHomework(List<String> homework) {
+    public void setHomework(String homework) {
         this.homework = homework;
     }
 }

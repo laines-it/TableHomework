@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         VPAdapter vpAdapter = new VPAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        vpAdapter.addFragment(new dz_fragment(),"ДЗ");
         vpAdapter.addFragment(new timetable_fragment(),"Расписание");
         vpAdapter.addFragment(new edit_fragment(),"Добавить/удалить ДЗ");
         ViewPager viewPager = binding.viewPager;

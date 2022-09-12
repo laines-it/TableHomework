@@ -42,6 +42,7 @@ public class timetable_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         Typeface tf_gill = getResources().getFont(R.font.gillsans);
         Typeface tf_goth = getResources().getFont(R.font.gothic);
         myRef.child("timetable").addValueEventListener(new ValueEventListener() {
@@ -50,7 +51,7 @@ public class timetable_fragment extends Fragment {
                 String[] days = {"Понедельник","Вторник","Среда","Четверг","Пятница"};
                 int i = 0;
                 LinearLayout l = getView().findViewById(R.id.parent);
-
+                l.removeAllViews();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     TextView this_day = new TextView(getActivity());
                     this_day.setText(days[i]);
@@ -88,13 +89,10 @@ public class timetable_fragment extends Fragment {
                         roomtv.setGravity(Gravity.CENTER);
 
                         TextView hwtv = new TextView(getActivity());
-                        StringBuilder hw_text = new StringBuilder();
-                        for(String s : lesson.getHomework()){
-                            hw_text.append(s + "\n");
-                        }
-                        hwtv.setText(hw_text);
+                        hwtv.setText(lesson.getHomework());
                         hwtv.setTypeface(tf_gill);
                         hwtv.setLayoutParams(big);
+                        hwtv.setTextSize(dp2px(7));
                         //special for hwtv
                         LinearLayout hw_parent = new LinearLayout(getActivity());
                         hw_parent.setLayoutParams(forparent);
@@ -113,6 +111,11 @@ public class timetable_fragment extends Fragment {
                         les_layout.addView(roomtv);
                         les_parent.addView(les_layout);
                         les_parent.addView(hw_parent);
+                        View line = new View(getActivity());
+                        LinearLayout.LayoutParams lines = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,dp2px(1));
+                        line.setBackgroundResource(R.color.black);
+                        line.setLayoutParams(lines);
+                        les_parent.addView(line);
                         l.addView(les_parent);
                     }
                     i++;
