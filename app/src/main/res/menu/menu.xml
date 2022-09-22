@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/telegram" android:icon="@drawable/telegram_logo" app:showAsAction="always"   android:title="telegram"/>
+    <item
+        android:id="@+id/vk" android:icon="@drawable/vk" app:showAsAction="always" android:title="vk"/>
+    <item
+        android:id="@+id/yd" android:icon="@drawable/yd" app:showAsAction="always" android:title="yd"/>
+</menu>

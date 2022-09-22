@@ -1,10 +1,15 @@
 package com.example.tablehomework.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -117,6 +122,7 @@ public class edit_fragment extends Fragment {
                         String finalPath = path[0];
                         Button edit_button = getView().findViewById(R.id.edit_button);
                         Button delete_button = getView().findViewById(R.id.delete_button);
+                        Button clear_button = getView().findViewById(R.id.clear_button);
                         EditText text_for_edit = getView().findViewById(R.id.edit_text);
                         edit.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -130,8 +136,11 @@ public class edit_fragment extends Fragment {
                                     text_for_edit.setHint("введите дз");
                                 }else{
                                     text_for_edit.setHint(current_homework.getText());
+                                    text_for_edit.setText(current_homework.getText());
                                 }
 
+                                clear_button.setClickable(true);
+                                clear_button.setVisibility(View.VISIBLE);
                                 text_for_edit.setVisibility(View.VISIBLE);
                                 edit_button.setClickable(true);
                                 edit_button.setVisibility(View.VISIBLE);
@@ -147,6 +156,21 @@ public class edit_fragment extends Fragment {
                                 Log.e("Edited HW", String.valueOf(day) + String.valueOf(finalLesson));
                                 database.getReference(finalPath).setValue(String.valueOf(text_for_edit.getText()));
                                 Toast.makeText(getContext(),"Домашнее задание сохранено", Toast.LENGTH_LONG).show();
+                                NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(),"notif");
+                                builder.setContentTitle("New Notification");
+                                builder.setContentText("Edited homework");
+                                builder.setSmallIcon(R.mipmap.logo);
+                                builder.setAutoCancel(true);
+
+                                NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getActivity());
+                                managerCompat.notify(1,builder.build());
+
+                            }
+                        });
+                        clear_button.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                text_for_edit.setText("");
                             }
                         });
 
@@ -162,6 +186,9 @@ public class edit_fragment extends Fragment {
                                 text_for_edit.setVisibility(View.INVISIBLE);
                                 edit_button.setVisibility(View.INVISIBLE);
                                 edit_button.setClickable(false);
+
+                                clear_button.setClickable(false);
+                                clear_button.setVisibility(View.INVISIBLE);
                                 delete_button.setVisibility(View.VISIBLE);
                                 delete_button.setClickable(true);
                                 String finalPath1 = path[0];

@@ -10,4 +10,7 @@
     <color name="red">#FF0000</color>
     <color name="green">#73F65C</color>
     <color name="grey">#5B292626</color>
+    <color name="not_today">#7E7D7D</color>
+    <color name="today">#FF000000</color>
+
 </resources>

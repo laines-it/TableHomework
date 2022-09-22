@@ -98,5 +98,17 @@
         app:layout_constraintTop_toBottomOf="@+id/radioGroup"
         android:visibility="invisible"/>
 
+    <Button
+        android:id="@+id/clear_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:clickable="false"
+        android:text="Очистить"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/edit_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

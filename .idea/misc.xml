@@ -11,10 +11,12 @@
         <entry key="..\:/Users/victo/StudioProjects/TableHomework/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/victo/StudioProjects/TableHomework/app/src/main/res/drawable/back.xml" value="0.1" />
         <entry key="..\:/Users/victo/StudioProjects/TableHomework/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/victo/StudioProjects/TableHomework/app/src/main/res/layout/activity_main.xml" value="0.1791569086651054" />
         <entry key="..\:/Users/victo/StudioProjects/TableHomework/app/src/main/res/layout/fragment_dz.xml" value="0.17346014492753623" />
-        <entry key="..\:/Users/victo/StudioProjects/TableHomework/app/src/main/res/layout/fragment_edit.xml" value="0.22" />
+        <entry key="..\:/Users/victo/StudioProjects/TableHomework/app/src/main/res/layout/fragment_edit.xml" value="0.5" />
         <entry key="..\:/Users/victo/StudioProjects/TableHomework/app/src/main/res/layout/fragment_timetable.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/victo/StudioProjects/TableHomework/app/src/main/res/layout/fragment_timetable_verxml.xml" value="0.22" />
+        <entry key="..\:/Users/victo/StudioProjects/TableHomework/app/src/main/res/layout/menu.xml" value="0.37996031746031744" />
         <entry key="..\:/Users/victo/StudioProjects/TableHomework/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
       </map>
     </option>
