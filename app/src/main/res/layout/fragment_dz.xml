@@ -1,19 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.dz_fragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TableLayout
-        android:id="@+id/parent_matrix"
+    tools:context=".fragments.death_calendar_fragment">
+ <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/month"
+        android:text=""
+        android:textSize="40sp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:stretchColumns="10">
+        android:layout_height="wrap_content" />
+    <com.github.sundeepk.compactcalendarview.CompactCalendarView
+        android:id="@+id/cal"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:compactCalendarBackgroundColor="#FFFFFF"
+        app:compactCalendarCurrentDayBackgroundColor="#C179FFD0"
+        app:compactCalendarCurrentSelectedDayBackgroundColor="#20E3C6"
+        app:compactCalendarMultiEventIndicatorColor="#fff"
+        app:compactCalendarTargetHeight="250dp"
+        app:compactCalendarTextColor="#000000"
+        app:compactCalendarTextSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:defaultFocusHighlightEnabled="true" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/subject_death"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textSize="20sp"
+            android:text=""
+            android:fontFamily="@font/gothic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/calendar" />
 
+        <TextView
+            android:id="@+id/event_death"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text=""
+            android:textSize="20sp"
+            android:fontFamily="@font/gothic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/subject_death" />
 
-
-    </TableLayout>
-</FrameLayout>
+        <LinearLayout
+            android:id="@+id/for_links"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/event_death"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:orientation="vertical">
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+</ScrollView>

@@ -10,10 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TableHomework">
         <activity
+            android:name=".EnterActivity"
+            android:exported="true">
+
+
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.TableHomework">
+            android:theme="@style/Theme.TableHomework"
+            android:label="CS">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.tablehomework.Access;
 import com.example.tablehomework.R;
 import com.example.tablehomework.supports.Lesson;
 import com.google.firebase.database.DataSnapshot;
@@ -32,15 +33,21 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class timetable_fragment extends Fragment {
     private FirebaseDatabase database;
     private DatabaseReference myRef;
+    private List<String> ver;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference();
+        myRef = database.getReference().child("timetable");
+        Access access = new Access(getContext());
+        ver = access.get("version.txt");
+        for (String string : ver)
+            Log.d("incoming text", string);
     }
 
     @Override
@@ -56,10 +63,11 @@ public class timetable_fragment extends Fragment {
 
         Typeface tf_gill = getResources().getFont(R.font.gillsans);
         Typeface tf_goth = getResources().getFont(R.font.gothic);
-        myRef.child("timetable").addValueEventListener(new ValueEventListener() {
+        myRef.addValueEventListener(new ValueEventListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 String[] days = {"Понедельник","Вторник","Среда","Четверг","Пятница"};
                 int i = 0;
                 Calendar calendar = Calendar.getInstance();
@@ -151,10 +159,51 @@ public class timetable_fragment extends Fragment {
                                 }
                             });
                         }else{
-                            TextView placeholder_r = new TextView(getActivity());
-                            placeholder_r.setLayoutParams(small);
-                            hw_parent.addView(placeholder_r);
+                            if(lesson.getSubject().equals("Алгоритмы и языки (лекция)")){
+                                RelativeLayout forbutton = new RelativeLayout(getActivity());
+                                forbutton.setLayoutParams(small);
+                                ImageButton classroom_button = new ImageButton(getActivity());
+                                classroom_button.setImageResource(R.drawable.moodle_logo);
+                                LinearLayout.LayoutParams with_button = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dp2px(50));
+                                classroom_button.setLayoutParams(with_button);
+                                classroom_button.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                                forbutton.addView(classroom_button);
+                                hw_parent.addView(forbutton);
+                                classroom_button.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Uri uri = Uri.parse("https://moodle.cs.msu.ru/course/view.php?id=18");
+                                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                        startActivity(intent);
+                                    }
+                                });
+                            }else{
+                                if(lesson.getSubject().equals("Алгебра и геометрия (лекция)")){
+                                    RelativeLayout forbutton = new RelativeLayout(getActivity());
+                                    forbutton.setLayoutParams(small);
+                                    ImageButton classroom_button = new ImageButton(getActivity());
+                                    classroom_button.setImageResource(R.drawable.abstract_logo);
+                                    LinearLayout.LayoutParams with_button = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dp2px(50));
+                                    classroom_button.setLayoutParams(with_button);
+                                    classroom_button.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                                    forbutton.addView(classroom_button);
+                                    hw_parent.addView(forbutton);
+                                    classroom_button.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Uri uri = Uri.parse("https://m.cs.msu.ru/index.php/s/N6FkcmFbxQkS8z9?dir=undefined&path=%2F%D0%9F%D0%B0%D0%BD%D1%84%D0%B5%D1%80%D0%BE%D0%B2%D0%92%D0%A1%2F%D0%9E%D1%81%D0%B5%D0%BD%D0%BD%D0%B8%D0%B9%20%D1%81%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D1%80%202022&openfile=651410");
+                                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                            startActivity(intent);
+                                        }
+                                    });
+                                }else{
+                                    TextView placeholder_r = new TextView(getActivity());
+                                    placeholder_r.setLayoutParams(small);
+                                    hw_parent.addView(placeholder_r);
+                                }
+                            }
                         }
+
                         les_layout.addView(timetv);
                         les_layout.addView(sjtv);
                         les_layout.addView(roomtv);

@@ -48,7 +48,7 @@ public class edit_fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference();
+        myRef = database.getReference().child("timetable");
         return inflater.inflate(R.layout.fragment_edit, container, false);
     }
 
@@ -62,7 +62,7 @@ public class edit_fragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                myRef.child("timetable").addValueEventListener(new ValueEventListener() {
+                myRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Calendar calendar = Calendar.getInstance();
@@ -156,14 +156,6 @@ public class edit_fragment extends Fragment {
                                 Log.e("Edited HW", String.valueOf(day) + String.valueOf(finalLesson));
                                 database.getReference(finalPath).setValue(String.valueOf(text_for_edit.getText()));
                                 Toast.makeText(getContext(),"Домашнее задание сохранено", Toast.LENGTH_LONG).show();
-                                NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(),"notif");
-                                builder.setContentTitle("New Notification");
-                                builder.setContentText("Edited homework");
-                                builder.setSmallIcon(R.mipmap.logo);
-                                builder.setAutoCancel(true);
-
-                                NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getActivity());
-                                managerCompat.notify(1,builder.build());
 
                             }
                         });

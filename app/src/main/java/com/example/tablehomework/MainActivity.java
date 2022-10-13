@@ -6,34 +6,34 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.tablehomework.fragments.dz_fragment;
+import com.example.tablehomework.databinding.ActivityMainBinding;
+import com.example.tablehomework.fragments.death_calendar_fragment;
 import com.example.tablehomework.fragments.edit_fragment;
 import com.example.tablehomework.fragments.timetable_fragment;
 import com.example.tablehomework.supports.VPAdapter;
-import com.google.android.material.tabs.TabLayout;
 
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.tablehomework.databinding.ActivityMainBinding;
-
 public class MainActivity extends AppCompatActivity {
-    
     private ActivityMainBinding binding;
-
+    private String access;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+//        access = getIntent().getStringExtra("access");
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         VPAdapter vpAdapter = new VPAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        vpAdapter.addFragment(new death_calendar_fragment(),"Календарь Смерти");
         vpAdapter.addFragment(new timetable_fragment(),"Расписание");
         vpAdapter.addFragment(new edit_fragment(),"Добавить/удалить ДЗ");
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(vpAdapter);
+        viewPager.setCurrentItem(1);
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
