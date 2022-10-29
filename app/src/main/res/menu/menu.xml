@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
 
     <item
-        android:id="@+id/telegram" android:icon="@drawable/telegram_logo" app:showAsAction="always"   android:title="telegram"/>
+        android:id="@+id/help" android:icon="@android:drawable/ic_menu_help" app:showAsAction="always"   android:title="help"/>
     <item
-        android:id="@+id/vk" android:icon="@drawable/vk" app:showAsAction="always" android:title="vk"/>
+        android:id="@+id/google_drive" android:icon="@drawable/google_drive_logo" app:showAsAction="always" android:title="google_drive"/>
     <item
         android:id="@+id/yd" android:icon="@drawable/yd" app:showAsAction="always" android:title="yd"/>
 </menu>

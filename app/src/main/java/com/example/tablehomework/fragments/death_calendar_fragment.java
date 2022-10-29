@@ -10,12 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,28 +29,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class death_calendar_fragment extends Fragment {
-    private FirebaseDatabase database;
     private DatabaseReference myRef;
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM - yyyy", Locale.getDefault());
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        database = FirebaseDatabase.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = database.getReference().child("deaths");
-//        ArrayList<Link> links = new ArrayList<Link>();
-//        links.add(new Link("<link>","<name>"));
-//        Death test = new Death("Алгебра и геометрия","Коллоквиум", 1667005200000L,links);
-//        myRef.child("116").push().setValue(test);
     }
 
     @Override
@@ -64,11 +56,11 @@ public class death_calendar_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        CompactCalendarView calendar = getActivity().findViewById(R.id.cal);
-        TextView subject = getActivity().findViewById(R.id.subject_death);
-        TextView event = getActivity().findViewById(R.id.event_death);
-        TextView this_month = getActivity().findViewById(R.id.month);
-        LinearLayout forlinks = getActivity().findViewById(R.id.for_links);
+        CompactCalendarView calendar = requireActivity().findViewById(R.id.cal);
+        TextView subject = requireActivity().findViewById(R.id.subject_death);
+        TextView event = requireActivity().findViewById(R.id.event_death);
+        TextView this_month = requireActivity().findViewById(R.id.month);
+        LinearLayout forlinks = requireActivity().findViewById(R.id.for_links);
         Typeface tf_gill = getResources().getFont(R.font.gillsans);
         Typeface tf_goth = getResources().getFont(R.font.gothic);
         calendar.setFirstDayOfWeek(Calendar.MONDAY);
@@ -78,10 +70,12 @@ public class death_calendar_fragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds: snapshot.getChildren()){
                     Log.e("ds is",ds.toString());
-                    if(!ds.getKey().equals("0")){
+                    if(!Objects.requireNonNull(ds.getKey()).equals("0")){
                         Death death = ds.getValue(Death.class);
-                        calendar.addEvent(new Event(Color.RED, (long) death.getDate(), ds.getKey()));
-
+                        assert death != null;
+                        if(death.getDate()>=(System.currentTimeMillis() - 82800000)) {
+                            calendar.addEvent(new Event(Color.RED, (long) death.getDate(), ds.getKey()));
+                        }
                     }
                 }
             }
@@ -104,6 +98,7 @@ public class death_calendar_fragment extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Death death = snapshot.child(String.valueOf(events.get(0).getData())).getValue(Death.class);
+                            assert death != null;
                             subject.setText(death.getSubject());
                             event.setText(death.getEvent());
 
@@ -124,13 +119,10 @@ public class death_calendar_fragment extends Fragment {
 
                                 ImageButton button = new ImageButton(getActivity());
                                 button.setImageResource(android.R.drawable.ic_menu_view);
-                                button.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        Uri uri_vk = Uri.parse(link.getLink());
-                                        Intent intent_v = new Intent(Intent.ACTION_VIEW, uri_vk);
-                                        startActivity(intent_v);
-                                    }
+                                button.setOnClickListener(view1 -> {
+                                    Uri uri_vk = Uri.parse(link.getLink());
+                                    Intent intent_v = new Intent(Intent.ACTION_VIEW, uri_vk);
+                                    startActivity(intent_v);
                                 });
                                 parent.addView(button);
                                 forlinks.addView(parent);

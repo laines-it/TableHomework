@@ -1,0 +1,199 @@
+{
+  "deaths": {
+    "116": {
+      "0": "",
+      "-NEGsBKQvUQEAo1C2f4L": {
+        "date": 1667005200000,
+        "event": "Коллоквиум",
+        "links": [
+          {
+            "link": "https://docs.google.com/document/d/1P9NYaEgEmoPrRPTHPtMFUAOOs43Vh4BiwW0Pw1yzItA/edit?usp=sharing",
+            "name": "Программа коллоквиума"
+          },
+          {
+            "link": "https://docs.google.com/document/d/1hifSNavcRm75M7IIFeVHRENFFscePT4zF5YO0-0a-d4/edit?usp=sharing",
+            "name": "Содержание лекций курса"
+          },
+          {
+            "link": "https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2FljGJ%2FKUXSQtTRipROZYgmj8jQzsO4AYeV8pj3SCje6DOOVzqfrd3y0zmdcMVc%2BPSq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F1%20%D0%BA%D1%83%D1%80%D1%81%2F%D0%90%D0%BB%D0%B3%D0%B5%D0%B1%D1%80%D0%B0%20%D0%B8%20%D0%B3%D0%B5%D0%BE%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D1%8F%20(%D0%9B%D0%B8%D0%BD%D0%B0%D0%BB)%2F4.%20%D0%9F%D0%BE%D0%B4%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BA%D0%B0%20%D0%BA%20%D1%8D%D0%BA%D0%B7%D0%B0%D0%BC%D0%B5%D0%BD%D1%83%20%D0%B8%20%D0%BA%D0%BE%D0%BB%D0%BB%D0%BE%D0%BA%D0%B2%D0%B8%D1%83%D0%BC%D1%83%2F1%20%D1%81%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D1%80%2F%5B%D0%9A%D0%BE%D0%BB%D0%BB%D0%BE%D0%BA%5D%20%D0%92%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B.docx&name=%5B%D0%9A%D0%BE%D0%BB%D0%BB%D0%BE%D0%BA%5D%20%D0%92%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B.docx&nosw=1",
+            "name": "Вопросы (возможные)"
+          },
+          {
+            "link": "https://disk.yandex.ru/d/L0C0IivmAD3N5w/1%20%D0%BA%D1%83%D1%80%D1%81/%D0%90%D0%BB%D0%B3%D0%B5%D0%B1%D1%80%D0%B0%20%D0%B8%20%D0%B3%D0%B5%D0%BE%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D1%8F%20(%D0%9B%D0%B8%D0%BD%D0%B0%D0%BB)",
+            "name": "Папка с линалом на ЯДиске"
+          },
+          {
+            "link": "https://docs.google.com/document/d/1CyGeRHfqNzAwIB8ye2j_-hDGuWIpi_K5m0B9F8xdwAo/edit?usp=sharing",
+            "name": "Билеты прошлого года"
+          }
+        ],
+        "subject": "Алгебра и геометрия"
+      },
+      "gay": {
+        "date": 1667264400000,
+        "event": "Коллоквиум",
+        "links": [
+          {
+            "link": "https://vk.me/join/RdgXMkYXHGelTvwj4x6yCCw2PHvSFu9AGFg=",
+            "name": "Беседа 116 в вк (есть билеты прошлых лет)"
+          },
+          {
+            "link": "https://disk.yandex.ru/d/L0C0IivmAD3N5w/1%20%D0%BA%D1%83%D1%80%D1%81/%5B2-3%20%D0%BF%D0%BE%D1%82%D0%BE%D0%BA%2C%201%20%D1%81%D0%B5%D0%BC.%5D%20%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D1%8B%20%D0%B8%20%D0%90%D0%AF",
+            "name": "Папка по алгоритмам на ЯДиске"
+          }
+        ],
+        "subject": "Алгоритмы и языки"
+      },
+      "rickrollhaha": {
+        "date": 1666832400000,
+        "event": "Контрольная работа",
+        "links": [
+          {
+            "link": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "name": "Слив кр "
+          }
+        ],
+        "subject": "Алгебра и геометрия"
+      }
+    }
+  },
+  "timetable": [
+    null,
+    [
+      {
+        "homework": "",
+        "room": "786",
+        "subject": "Алгебра и геометрия (сем)",
+        "time": "8:45 - 10:20"
+      },
+      {
+        "homework": "контрольные вопросы из презентации",
+        "room": "614",
+        "subject": "Безопасность жизнедеятельности",
+        "time": "10:30 - 12:05"
+      },
+      {
+        "homework": "",
+        "room": "П - 6",
+        "subject": "Математический анализ (лекция)",
+        "time": "12:50 - 14:25"
+      },
+      {
+        "homework": "бегит, прес качат, анжумания",
+        "room": "",
+        "subject": "Физическая культура",
+        "time": "15:45 - 17:15"
+      }
+    ],
+    [
+      {
+        "homework": "",
+        "room": "П - 14",
+        "subject": "Алгоритмы и языки (лекция)",
+        "time": "8:45 - 10:20"
+      },
+      {
+        "homework": "",
+        "room": "П - 14",
+        "subject": "Алгебра и геометрия (лекция)",
+        "time": "10:30 - 12:05"
+      },
+      {
+        "homework": "задачи по порядковому номеру",
+        "room": "503",
+        "subject": "Практикум на ЭВМ",
+        "time": "12:15 - 13:40"
+      }
+    ],
+    [
+      {
+        "homework": "",
+        "room": "645",
+        "subject": "Практикум на ЭВМ",
+        "time": "8:45 - 10:20"
+      },
+      {
+        "homework": "выучить 144 определения, повторить элем. функции\n414-433",
+        "room": "613",
+        "subject": "Математический анализ (сем)",
+        "time": "10:30 - 12:05"
+      },
+      {
+        "homework": "",
+        "room": "П - 6",
+        "subject": "Математический анализ (лекция)",
+        "time": "12:50 - 14:25"
+      },
+      {
+        "homework": "",
+        "room": "",
+        "subject": "Межфакультетские курсы",
+        "time": "15:50 - 18:50"
+      }
+    ],
+    [
+      {
+        "homework": "",
+        "room": "П - 14",
+        "subject": "Алгоритмы и языки (лекция)",
+        "time": "8:45 - 10:20"
+      },
+      {
+        "homework": "",
+        "room": "П - 14",
+        "subject": "Алгебра и геометрия (лекция)",
+        "time": "10:30 - 12:05"
+      },
+      {
+        "homework": "",
+        "room": "524",
+        "subject": "История",
+        "time": "12:50 - 14:25"
+      },
+      {
+        "homework": "15.33е, 16.7, 16.14, 16.15, 16.60б, 16.61б",
+        "room": "785",
+        "subject": "Алгебра и геометрия (сем)",
+        "time": "14:35 - 16:10"
+      },
+      {
+        "homework": "",
+        "room": "П - 14",
+        "subject": "История (лекция)",
+        "time": "16:20 - 17:55"
+      }
+    ],
+    [
+      {
+        "homework": "",
+        "room": "П - 14",
+        "subject": "Физическая культура",
+        "time": "8:45 - 10:20"
+      },
+      {
+        "homework": "",
+        "room": "785/786",
+        "subject": "Английский язык",
+        "time": "10:30 - 12:05"
+      },
+      {
+        "homework": "",
+        "room": "785/786",
+        "subject": "Английский язык",
+        "time": "12:50 - 14:25"
+      },
+      {
+        "homework": "замечательные (просто охуительные) перделы",
+        "room": "687",
+        "subject": "Математический анализ (сем)",
+        "time": "14:35 - 16:10"
+      }
+    ]
+  ],
+  "version": {
+    "note": [
+      "Дальнейшие патчи добавляются автоматически"
+    ],
+    "patch": 1.2
+  }
+}
