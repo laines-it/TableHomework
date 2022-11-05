@@ -1,6 +1,8 @@
 package com.example.tablehomework.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -30,12 +32,16 @@ import java.util.Calendar;
 public class edit_fragment extends Fragment {
     private DatabaseReference myRef;
     private FirebaseDatabase database;
+    private SharedPreferences preferences;
+    private String group;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference().child("timetable");
+        preferences = getActivity().getApplicationContext().getSharedPreferences("com.example.tablehomework", Context.MODE_PRIVATE);
+        group = preferences.getString("enter","denied");
+        myRef = database.getReference().child("testtable").child(group).child("timetable");
         return inflater.inflate(R.layout.fragment_edit, container, false);
     }
 
@@ -43,76 +49,62 @@ public class edit_fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TextView current_homework = requireView().findViewById(R.id.current_homework);
-        Log.e("WHAT","WHY U READ THIS");
         Spinner spinner = requireView().findViewById(R.id.subject_spinner);
-        final String[] path = {null};
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 myRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String[] path = {null,null};
                         Calendar calendar = Calendar.getInstance();
                         calendar.setFirstDayOfWeek(Calendar.SUNDAY);
                         int day = calendar.get(Calendar.DAY_OF_WEEK) - 1;
-                        Log.d("TODAY", String.valueOf(day));
-
                         boolean finding = true;
+                        long addday = System.currentTimeMillis();
                         int lesson = 0;
                         //Not beautiful but effective
-                        for (int i = day + 1; i <= 5; i++) {
-                            if (!finding) {
-                                break;
-                            }
+                        for (int i = day + 1; (i <= 5) && finding; i++) {
+                            addday += 86400000;
                             for (lesson = 0; lesson <= snapshot.child(String.valueOf(i)).getChildrenCount(); lesson++) {
-                                Log.d("I'm checking", String.valueOf(i) + lesson);
-
                                 if (String.valueOf(snapshot.child(String.valueOf(i)).child(String.valueOf(lesson)).child("subject").getValue()).equals(spinner.getSelectedItem().toString())) {
-                                    Log.e("IMPORTANT", "U FOUND THIS!");
-                                    Log.e("Subject", String.valueOf(snapshot.child(String.valueOf(i)).child(String.valueOf(lesson)).child("subject").getValue()));
                                     StringBuilder hw = new StringBuilder();
                                     DataSnapshot snapshot_hw = snapshot.child(String.valueOf(i)).child(String.valueOf(lesson)).child("homework");
                                     hw.append((String) snapshot_hw.getValue());
                                     current_homework.setText(String.valueOf(hw));
-                                    path[0] = "timetable/" + i + "/" + lesson + "/homework/";
-                                    Log.e("CH set text", String.valueOf(hw));
+                                    path[0] = "testtable/" + group + "/timetable/" + i + "/" + lesson + "/homework/";
+                                    path[1] = "testtable/" + group + "/timetable/" + i + "/" + lesson + "/when/";
                                     finding = false;
                                     break;
                                 }
                             }
 
                         }
-                        if (finding) {
-                            for (int i = 1; i <= day; i++) {
-                                if (finding) {
-                                    for (lesson = 0; lesson <= snapshot.child(String.valueOf(i)).getChildrenCount(); lesson++) {
-                                        Log.d("I'm checking", String.valueOf(i) + lesson);
-                                        String my_subject = spinner.getSelectedItem().toString();
-                                        if (String.valueOf(snapshot.child(String.valueOf(i)).child(String.valueOf(lesson)).child("subject").getValue()).equals(my_subject)) {
-                                            Log.e("IMPORTANT", "U FOUND THIS!");
-                                            Log.e("Subject", String.valueOf(snapshot.child(String.valueOf(i)).child(String.valueOf(lesson)).child("subject").getValue()));
-                                            path[0] = "timetable/" + i + "/" + lesson + "/homework/";
-                                            DataSnapshot snapshot_hw = snapshot.child(String.valueOf(i)).child(String.valueOf(lesson)).child("homework");
-                                            current_homework.setText((String) snapshot_hw.getValue());
-                                            finding = false;
-                                            break;
-                                        }
+                        for (int i = 0; (i <= day) && finding; i++) {
+                            addday += 86400000;
+                                for (lesson = 0; lesson <= snapshot.child(String.valueOf(i)).getChildrenCount(); lesson++) {
+                                    String my_subject = spinner.getSelectedItem().toString();
+                                    if (String.valueOf(snapshot.child(String.valueOf(i)).child(String.valueOf(lesson)).child("subject").getValue()).equals(my_subject)) {
+                                        addday += 86400000L * (7 - day);
+                                        path[0] = "testtable/" + group + "/timetable/" + i + "/" + lesson + "/homework/";
+                                        path[1] = "testtable/" + group + "/timetable/" + i + "/" + lesson + "/when/";
+                                        DataSnapshot snapshot_hw = snapshot.child(String.valueOf(i)).child(String.valueOf(lesson)).child("homework");
+                                        current_homework.setText((String) snapshot_hw.getValue());
+                                        finding = false;
+                                        break;
                                     }
                                 }
-                            }
+
                         }
 
                         //f
                         Button edit = requireView().findViewById(R.id.edit_radio);
                         Button delete = requireView().findViewById(R.id.delete_radio);
-                        int finalLesson = lesson;
-                        String finalPath = path[0];
                         Button edit_button = requireView().findViewById(R.id.edit_button);
                         Button delete_button = requireView().findViewById(R.id.delete_button);
                         Button clear_button = requireView().findViewById(R.id.clear_button);
                         EditText text_for_edit = requireView().findViewById(R.id.edit_text);
                         edit.setOnClickListener(view15 -> {
-                            Log.e("YOU", "GREEN");
                             edit.setClickable(false);
                             delete.setClickable(true);
                             delete.setBackgroundResource(R.color.red);
@@ -134,16 +126,15 @@ public class edit_fragment extends Fragment {
                             delete1.setVisibility(View.INVISIBLE);
 
                         });
+                        long finalAddday = addday;
                         edit_button.setOnClickListener(view14 -> {
-                            Log.e("Edited HW", String.valueOf((day) + (finalLesson)));
-                            database.getReference(finalPath).setValue(String.valueOf(text_for_edit.getText()));
+                            database.getReference(path[0]).setValue(String.valueOf(text_for_edit.getText()));
+                            database.getReference(path[1]).setValue(finalAddday);
                             Toast.makeText(getContext(),"Домашнее задание сохранено", Toast.LENGTH_LONG).show();
-
                         });
                         clear_button.setOnClickListener(view13 -> text_for_edit.setText(""));
 
                         delete.setOnClickListener(view12 -> {
-                            Log.e("YOU","RED");
                             edit.setClickable(true);
                             delete.setClickable(false);
                             delete.setBackgroundResource(R.color.grey);

@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(vpAdapter);
         viewPager.setCurrentItem(1);
+        
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

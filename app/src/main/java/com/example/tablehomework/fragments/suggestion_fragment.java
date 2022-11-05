@@ -30,7 +30,6 @@ public class suggestion_fragment extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        setStyle(STYLE_NORMAL,R.style.Theme_TableHomework_NoActionBar);
         View v = inflater.inflate(R.layout.dialog, null);
         getDialog().setTitle("Сообщение разработчику");
         Button send = v.findViewById(R.id.send);

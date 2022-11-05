@@ -1,16 +1,23 @@
 <resources>
-    <string name="app_name">ВМК 116 группа</string>
-    <string name="tab_text_1">ДЗ</string>
-    <string name="tab_text_2">Расписание</string>
-    <string name="tab_text_3">Изменить</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">ВМК</string>
     <string-array name="subjects">
+        <item>"Предмет"</item>
         <item>"Математический анализ (сем)"</item>
         <item>"Алгебра и геометрия (сем)"</item>
+        <item>"Математический анализ (лекция)"</item>
+        <item>"Алгебра и геометрия (лекция)"</item>
         <item>"Практикум на ЭВМ"</item>
         <item>"История"</item>
         <item>"Английский язык"</item>
         <item>"Безопасность жизнедеятельности"</item>
         <item>"Физическая культура"</item>
+
+    </string-array>
+    <string-array name="deaths">
+        <item>"Смерть"</item>
+        <item>"Экзамен"</item>
+        <item>"Коллоквиум"</item>
+        <item>"Контрольная работа"</item>
+        <item>"Самостоятельная работа"</item>
     </string-array>
 </resources>

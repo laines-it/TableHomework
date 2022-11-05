@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:scaleType="centerInside"
         android:src="@drawable/panferov"
-        android:visibility="invisible"/>
+        android:visibility="visible"/>
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"

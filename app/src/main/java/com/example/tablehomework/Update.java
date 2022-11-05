@@ -37,6 +37,8 @@ import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import org.w3c.dom.Text;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -51,7 +53,7 @@ import java.net.URLConnection;
 public class Update extends AppCompatActivity {
     Intent intent;
     DownloadManager mgr;
-    TextSwitcher textpatch;
+    TextView textpatch;
     TextView nump;
     LinearLayout parent;
     Button download;
@@ -67,8 +69,6 @@ public class Update extends AppCompatActivity {
         TextView up = findViewById(R.id.up);
         textpatch = findViewById(R.id.text_patch);
         download = findViewById(R.id.down_butt);
-        textpatch.setInAnimation(getApplicationContext(),android.R.anim.fade_in);
-        textpatch.setOutAnimation(getApplicationContext(), android.R.anim.fade_out);
         nump = findViewById(R.id.num);
         int height = getResources().getDisplayMetrics().heightPixels;
         int width = getResources().getDisplayMetrics().widthPixels;
@@ -124,7 +124,6 @@ public class Update extends AppCompatActivity {
 
             }
         });
-        textpatch .setText("Патч");
         download.setClickable(true);
         download.setOnClickListener(new View.OnClickListener() {
             @Override
