@@ -7,17 +7,23 @@
         <item>"Математический анализ (лекция)"</item>
         <item>"Алгебра и геометрия (лекция)"</item>
         <item>"Практикум на ЭВМ"</item>
-        <item>"История"</item>
+        <item>"Архитектура ЭВМ и язык Ассемблера"</item>
+        <item>"Русский язык и культура речи (сем)"</item>
+        <item>"Русский язык и культура речи (лекция)"</item>
         <item>"Английский язык"</item>
-        <item>"Безопасность жизнедеятельности"</item>
+        <item>"Дискретная математика (сем)"</item>
+        <item>"Дискретная математика (лекция)"</item>
         <item>"Физическая культура"</item>
 
     </string-array>
     <string-array name="deaths">
         <item>"Смерть"</item>
         <item>"Экзамен"</item>
+        <item>"Зачёт"</item>
         <item>"Коллоквиум"</item>
         <item>"Контрольная работа"</item>
         <item>"Самостоятельная работа"</item>
+        <item>"Пересдача"</item>
     </string-array>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

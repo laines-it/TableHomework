@@ -1,35 +1,22 @@
 package com.example.tablehomework;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.storage.StorageManager;
 import android.util.Log;
-import android.widget.TextView;
+import android.view.View;
 
 import com.example.tablehomework.fragments.enter_dialog;
-import com.example.tablehomework.fragments.suggestion_fragment;
-import com.example.tablehomework.supports.Access;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import java.io.File;
 
 public class EnterActivity extends AppCompatActivity {
     private DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
@@ -41,7 +28,16 @@ public class EnterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter);
         preferences = getApplicationContext().getSharedPreferences("com.example.tablehomework",Context.MODE_PRIVATE);
-        preferences.edit().putString("version", "1.3").apply();
+        if(preferences.getBoolean("first",true)){
+            preferences.edit().putString("remove_splash","null").apply();
+            findViewById(R.id.splash_image).setVisibility(View.VISIBLE);
+            preferences.edit().putString("version", "1.51").apply();
+            preferences.edit().putString("enter", "denied").apply();
+            preferences.edit().putBoolean("first",false).apply();
+        }
+        if(preferences.getString("remove_splash","null").equals("none")){
+            findViewById(R.id.splash_image).setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -52,7 +48,7 @@ public class EnterActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(!lock){
-                if(Double.parseDouble(preferences.getString("version","1.3")) >= ((double) snapshot.child("patch").getValue())){
+                if(Double.parseDouble(preferences.getString("version","1.51")) >= ((double) snapshot.child("patch").getValue())){
                     String key = preferences.getString("enter","denied");
                     Log.e("ACCESS TO", String.valueOf(key));
                     if (key.equals("denied")){
@@ -67,6 +63,7 @@ public class EnterActivity extends AppCompatActivity {
                         lock = true;
                     }
                 }else{
+                    preferences.edit().putBoolean("first",true).apply();
                     Intent intent = new Intent(EnterActivity.this, Update.class);
                     startActivity(intent);
                     ref.removeEventListener(listener);

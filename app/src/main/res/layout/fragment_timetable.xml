@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/scrollView"
+
     tools:context=".fragments.timetable_fragment">
 
-    <LinearLayout
-        android:id="@+id/parent"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"/>
-</androidx.core.widget.NestedScrollView>
+        android:id="@+id/scrollView">
+        <LinearLayout
+            android:id="@+id/parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"/>
+    </androidx.core.widget.NestedScrollView>
+
+
+    <com.example.tablehomework.supports.MovableFloatingActionButton
+        android:id="@+id/accept_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="40dp"
+        android:visibility="invisible"
+        android:layout_gravity="bottom|end"
+        android:src="@drawable/checkmark" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

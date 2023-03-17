@@ -2,11 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
-
+    <item
+        android:id="@+id/freerooms" android:icon="@drawable/freeroom_icon" app:showAsAction="always" android:title="show_rooms"/>
+    <item
+        android:id="@+id/edit_tt" android:icon="@android:drawable/ic_menu_edit" app:showAsAction="always" android:title="edit_timetable"/>
     <item
         android:id="@+id/help" android:icon="@android:drawable/ic_menu_help" app:showAsAction="always"   android:title="help"/>
     <item
-        android:id="@+id/google_drive" android:icon="@drawable/google_drive_logo" app:showAsAction="always" android:title="google_drive"/>
-    <item
         android:id="@+id/yd" android:icon="@drawable/yd" app:showAsAction="always" android:title="yd"/>
-</menu>
+    </menu>

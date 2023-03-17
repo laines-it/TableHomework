@@ -8,9 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,14 +15,11 @@ import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.tablehomework.R;
-import com.example.tablehomework.supports.Access;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.io.IOException;
 
 public class enter_dialog extends DialogFragment {
 
@@ -35,7 +29,6 @@ public class enter_dialog extends DialogFragment {
 
         super.onCreateView(inflater, container, savedInstanceState);
         View v = inflater.inflate(R.layout.dialog_enter, null);
-        getDialog().setTitle("Сообщение разработчику");
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("version").child("count");
         LinearLayoutCompat parent = v.findViewById(R.id.parent_group);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {

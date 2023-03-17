@@ -12,13 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -90,7 +87,16 @@ public class death_calendar_fragment extends Fragment {
                         Death death = ds.getValue(Death.class);
                         assert death != null;
                         if(death.getDate()>=(System.currentTimeMillis() - 82800000)) {
-                            calendar.addEvent(new Event(Color.RED, (long) death.getDate(), ds.getKey()));
+                            int c = R.color.green;
+                            switch(death.getEvent()){
+                                case("Экзамен"): c = R.color.bord; break;
+                                case("Зачёт"): c = R.color.bord; break;
+                                case("Коллоквиум"): c = R.color.red; break;
+                                case("Контрольная работа"): c = R.color.orange; break;
+                                case("Самостоятельная работа"): c = R.color.purple_500; break;
+                                case("Пересдача"): c = R.color.black; break;
+                            }
+                            calendar.addEvent(new Event(c, (long) death.getDate(), ds.getKey()));
                         }
                     }
                 }
@@ -210,7 +216,7 @@ public class death_calendar_fragment extends Fragment {
 //                int month = m + 1;
 //                Log.e("Selected day is",String.valueOf(month) + "/" + String.valueOf(dayOfMonth));
 //                LinearLayout links = getActivity().findViewById(R.id.for_links);
-//                myRef.child("116").addValueEventListener(new ValueEventListener() {
+//                myReueEventListener(new ValueEventListener() {
 //                    @Override
 //                    public void onDataChange(@NonNull DataSnapshot snapshot) {
 //                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
@@ -219,7 +225,7 @@ public class death_calendar_fragment extends Fragment {
 //                                String n = "Билеты";
 //                                String l = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
 //                                Link link = new Link(n,l);
-//                                myRef.child("116").push();}
+//                                myRe
 //                            if (d.getDate().equals(String.valueOf(month) + "/" + String.valueOf(dayOfMonth))) {
 //                                subject.setText(d.getSubject());
 //                                event.setText(d.getEvent());

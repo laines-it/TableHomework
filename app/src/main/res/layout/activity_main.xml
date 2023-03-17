@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+<!--    <com.example.tablehomework.supports.MovableFloatingActionButton-->
+<!--        android:id="@+id/mfab_chat"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:layout_marginBottom="40dp"-->
+<!--        android:layout_gravity="bottom|end"-->
+<!--        android:src="@android:drawable/sym_action_chat" />-->
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
