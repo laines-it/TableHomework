@@ -31,7 +31,7 @@ public class EnterActivity extends AppCompatActivity {
         if(preferences.getBoolean("first",true)){
             preferences.edit().putString("remove_splash","null").apply();
             findViewById(R.id.splash_image).setVisibility(View.VISIBLE);
-            preferences.edit().putString("version", "1.51").apply();
+            preferences.edit().putString("version", "1.6").apply();
             preferences.edit().putString("enter", "denied").apply();
             preferences.edit().putBoolean("first",false).apply();
         }
@@ -48,7 +48,7 @@ public class EnterActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(!lock){
-                if(Double.parseDouble(preferences.getString("version","1.51")) >= ((double) snapshot.child("patch").getValue())){
+                if(Double.parseDouble(preferences.getString("version","1.6")) >= ((double) snapshot.child("patch").getValue())){
                     String key = preferences.getString("enter","denied");
                     Log.e("ACCESS TO", String.valueOf(key));
                     if (key.equals("denied")){
