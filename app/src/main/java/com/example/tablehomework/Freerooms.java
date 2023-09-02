@@ -33,7 +33,6 @@ import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.tablehomework.MainActivity;
 import com.example.tablehomework.R;
 import com.example.tablehomework.supports.Lesson;
 import com.example.tablehomework.supports.LinkFromLesson;

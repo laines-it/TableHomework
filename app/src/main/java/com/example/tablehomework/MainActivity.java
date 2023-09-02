@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.tablehomework.databinding.ActivityMainBinding;
 import com.example.tablehomework.fragments.TimetableEditActivity;
@@ -34,13 +35,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences preferences;
+    DatabaseReference ref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         com.example.tablehomework.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         preferences = getApplicationContext().getSharedPreferences("com.tablehomework",MODE_PRIVATE);
-        FirebaseDatabase.getInstance().getReference().child("social").child("freeid").addListenerForSingleValueEvent(new ValueEventListener() {
+        ref = FirebaseDatabase.getInstance().getReference();
+        ref.child("social").child("freeid").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(preferences.getInt("id",0) == 0) {
@@ -60,14 +63,6 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(vpAdapter);
         viewPager.setCurrentItem(1);
-//        MovableFloatingActionButton mfab = binding.mfabChat;
-//        mfab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent_v = new Intent(MainActivity.this,ChatActivity.class);
-//                startActivity(intent_v);
-//            }
-//        });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -82,16 +77,36 @@ public class MainActivity extends AppCompatActivity {
             df.show(getSupportFragmentManager(),"what");
             return(true);
         case R.id.yd:
-            Uri uri_yd = Uri.parse("https://disk.yandex.ru/d/L0C0IivmAD3N5w");
-            Intent intent_yd = new Intent(Intent.ACTION_VIEW, uri_yd);
-            startActivity(intent_yd);
+            Intent intent_yd;
+            ref.child("social").child("links").child("disk").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String uri_string = snapshot.getValue(String.class);
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uri_string)));
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {}
+            });
             return(true);
         case R.id.edit_tt:
             Intent intent2edit = new Intent(MainActivity.this, TimetableEditActivity.class);
             startActivity(intent2edit);
+            return(true);
         case R.id.freerooms:
-            Intent intent2room = new Intent(MainActivity.this, Freerooms.class);
-            startActivity(intent2room);
+            ref.child("version").child("rooms_actual").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.getValue(Boolean.class)){
+                        Intent intent2room = new Intent(MainActivity.this, Freerooms.class);
+                        startActivity(intent2room);
+                    }else{
+                        Toast.makeText(getApplicationContext(),"Раздел находится в доработке",Toast.LENGTH_LONG).show();
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {}
+            });
+            return(true);
     }
         return(super.onOptionsItemSelected(item));
     }

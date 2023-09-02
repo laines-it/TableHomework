@@ -1,21 +1,5 @@
 <resources>
     <string name="app_name">ВМК</string>
-    <string-array name="subjects">
-        <item>"Предмет"</item>
-        <item>"Математический анализ (сем)"</item>
-        <item>"Алгебра и геометрия (сем)"</item>
-        <item>"Математический анализ (лекция)"</item>
-        <item>"Алгебра и геометрия (лекция)"</item>
-        <item>"Практикум на ЭВМ"</item>
-        <item>"Архитектура ЭВМ и язык Ассемблера"</item>
-        <item>"Русский язык и культура речи (сем)"</item>
-        <item>"Русский язык и культура речи (лекция)"</item>
-        <item>"Английский язык"</item>
-        <item>"Дискретная математика (сем)"</item>
-        <item>"Дискретная математика (лекция)"</item>
-        <item>"Физическая культура"</item>
-
-    </string-array>
     <string-array name="deaths">
         <item>"Смерть"</item>
         <item>"Экзамен"</item>

@@ -37,7 +37,7 @@
 
      <androidx.constraintlayout.widget.ConstraintLayout
          android:layout_width="match_parent"
-         android:layout_height="148dp"
+         android:layout_height="match_parent"
          android:orientation="vertical">
 
          <Button
@@ -46,14 +46,17 @@
              android:layout_height="wrap_content"
              android:text=""
              android:visibility="invisible"
-             app:layout_constraintBottom_toBottomOf="parent"
-             app:layout_constraintEnd_toEndOf="parent" />
+             android:clickable="false"
+             android:layout_marginTop="148dp"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
          <Button
              android:id="@+id/button_add"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:text=""
-             android:visibility="visible"
+             android:visibility="invisible"
+             android:clickable="false"
              app:layout_constraintBottom_toTopOf="@id/button_delete"
              app:layout_constraintEnd_toEndOf="parent" />
 
@@ -63,62 +66,12 @@
              android:layout_height="wrap_content"
              app:layout_constraintStart_toStartOf="parent"
              app:layout_constraintTop_toTopOf="parent"
+             android:layout_marginTop="30dp"
              android:layout_marginStart="16dp"
-             android:orientation="vertical" />
-         <TextView
-             android:id="@+id/subject_death"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginStart="16dp"
-             android:clickable="false"
-             android:fontFamily="@font/gothic"
-             android:text=""
-             android:textSize="20sp"
-             android:visibility="invisible"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toTopOf="parent" />
+             android:orientation="vertical">
 
-         <TextView
-             android:id="@+id/event_death"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginStart="16dp"
-             android:layout_marginTop="16dp"
-             android:clickable="false"
-             android:fontFamily="@font/gothic"
-             android:text=""
-             android:textSize="20sp"
-             android:visibility="invisible"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toBottomOf="@+id/subject_death" />
 
-         <Spinner
-             android:id="@+id/spinner_death"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:entries="@array/subjects"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toTopOf="parent" />
-
-         <Spinner
-             android:id="@+id/spinner_event"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginTop="16dp"
-             android:entries="@array/deaths"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toBottomOf="@+id/subject_death" />
+         </LinearLayout>
      </androidx.constraintlayout.widget.ConstraintLayout>
-        <LinearLayout
-            android:id="@+id/for_links"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/event_death"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="20dp"
-            android:orientation="vertical">
-        </LinearLayout>
-
 </LinearLayout>
 </ScrollView>

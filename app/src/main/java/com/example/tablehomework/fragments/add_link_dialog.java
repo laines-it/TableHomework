@@ -19,7 +19,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.loader.content.Loader;
 
-import com.example.tablehomework.MainActivity;
 import com.example.tablehomework.R;
 import com.example.tablehomework.supports.LinkFromLesson;
 import com.google.firebase.database.DataSnapshot;

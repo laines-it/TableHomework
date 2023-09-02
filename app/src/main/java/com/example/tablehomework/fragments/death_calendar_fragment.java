@@ -10,18 +10,16 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.tablehomework.R;
@@ -37,6 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -67,128 +66,141 @@ public class death_calendar_fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         CompactCalendarView calendar = requireActivity().findViewById(R.id.cal);
-        TextView subject = requireActivity().findViewById(R.id.subject_death);
-        TextView event = requireActivity().findViewById(R.id.event_death);
-        Spinner s_subject = requireActivity().findViewById(R.id.spinner_death);
-        Spinner s_event = requireActivity().findViewById(R.id.spinner_event);
         TextView this_month = requireActivity().findViewById(R.id.month);
         Button add = requireActivity().findViewById(R.id.button_add);
-        LinearLayout forlinks = requireActivity().findViewById(R.id.for_links);
+        Button delete = requireActivity().findViewById(R.id.button_delete);
+        LinearLayout parent_deaths = requireActivity().findViewById(R.id.parent_deaths);
         Typeface tf_gill = getResources().getFont(R.font.gillsans);
         Typeface tf_goth = getResources().getFont(R.font.gothic);
         calendar.setFirstDayOfWeek(Calendar.MONDAY);
         calendar.setUseThreeLetterAbbreviation(true);
-        myRef.child(getActivity().getApplicationContext()
-                        .getSharedPreferences("com.example.tablehomework", Context.MODE_PRIVATE)
-                        .getString("enter","denied"))
+        myRef.child(preferences.getString("enter","denied"))
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         calendar.removeAllEvents();
                         for(DataSnapshot ds: snapshot.getChildren()){
                             if(!Objects.requireNonNull(ds.getKey()).equals("0")){
-                                Death death = ds.getValue(Death.class);
-                                assert death != null;
-                                if(death.getDate()>=(System.currentTimeMillis() - 82800000)) {
-                                    calendar.addEvent(new Event(Color.RED, (long) death.getDate(), ds.getKey()));
+                                for(DataSnapshot death_snapshot : ds.getChildren()){
+                                    Death death = death_snapshot.getValue(Death.class);
+                                    assert death != null;
+                                    if(death.getDate()>=(System.currentTimeMillis() - 82800000)) {
+                                        int color = Color.RED;
+                                        switch(death.getEvent()){
+                                            case "Экзамен":
+                                                color = Color.RED;
+                                                break;
+                                            case "Зачёт":
+                                                color = Color.RED;
+                                                break;
+                                            case "Коллоквиум":
+                                                color = Color.MAGENTA;
+                                                break;
+                                            case "Контрольная работа":
+                                                color = Color.MAGENTA;
+                                                break;
+                                            case "Самостоятельная работа":
+                                                color = Color.BLUE;
+                                                break;
+                                            case "Пересдача":
+                                                color = Color.BLACK;
+                                                break;
+                                        }
+                                        calendar.addEvent(new Event(color,(long) death.getDate(), ds.getKey()));
+                                    }
                                 }
                             }
                         }
                     }
-
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
+                    public void onCancelled(@NonNull DatabaseError error) {}
                 });
         calendar.setListener(new CompactCalendarView.CompactCalendarViewListener(){
             @Override
             public void onDayClick(Date dateClicked){
                 List<Event> events = calendar.getEvents(dateClicked);
-                forlinks.removeAllViews();
-                if(events.size() == 0){
-                    s_subject.setSelection(0);
-                    s_event.setSelection(0);
-                    s_subject.setVisibility(View.VISIBLE);
-                    s_event.setVisibility(View.VISIBLE);
-                    subject.setText("");
-                    event.setText("");
-                    subject.setVisibility(View.INVISIBLE);
-                    event.setVisibility(View.INVISIBLE);
-                    s_subject.setEnabled(true);
-                    s_event.setEnabled(true);
-                    add.setText("Добавить");
-                    add.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            myRef.child(preferences.getString("enter","denied")).addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    Death death = new Death();
-                                    long time = dateClicked.getTime();
-                                    death.setDate(time);
-                                    death.setSubject(String.valueOf(s_subject.getSelectedItem()));
-                                    death.setEvent(String.valueOf(s_event.getSelectedItem()));
-                                    database.getReference("deaths/" + preferences.getString("enter","denied") + "/" + time).setValue(death);
-                                }
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                }
-                            });
-                        }
-                    });
-                }else{
-                    subject.setVisibility(View.VISIBLE);
-                    event.setVisibility(View.VISIBLE);
-                    s_subject.setEnabled(false);
-                    s_event.setEnabled(false);
-                    s_subject.setVisibility(View.INVISIBLE);
-                    s_event.setVisibility(View.INVISIBLE);
-                    add.setText("Удалить");
-                    add.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            database.getReference("deaths/" + preferences.getString("enter","denied") + "/" + dateClicked.getTime()).removeValue();
-                            subject.setText("");
-                            event.setText("");
-                        }
-                    });
-                    myRef.child(preferences.getString("enter","denied")).addListenerForSingleValueEvent(new ValueEventListener() {
+                parent_deaths.removeAllViews();
+                add.setClickable(true);
+                add.setVisibility(View.VISIBLE);
+                add.setText("Добавить");
+                add.setOnClickListener(view -> {
+                    DialogFragment d = new add_death_fragment();
+                    Bundle a = new Bundle();
+                    a.putLong("DATE",dateClicked.getTime());
+                    d.setArguments(a);
+                    d.show(getActivity().getSupportFragmentManager(),"what");
+                });
+                if(events.size() > 0){
+                    Log.e("THIS DAY WE HAVE ", String.valueOf(events.size()));
+                    myRef.child(preferences.getString("enter","denied"))
+                         .child(String.valueOf(dateClicked.getTime())).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            Death death = snapshot.child(String.valueOf(events.get(0).getData())).getValue(Death.class);
-                            assert death != null;
-                            subject.setText(death.getSubject());
-                            event.setText(death.getEvent());
+                            ArrayList<String> death_list = new ArrayList<>();
+                            ArrayList<String> keys_to_deaths = new ArrayList<>();
+                            for(DataSnapshot ds : snapshot.getChildren()){
+                                Death death = ds.getValue(Death.class);
+                                assert death != null;
+                                keys_to_deaths.add(ds.getKey());
+                                death_list.add(death.getSubject());
+                                TextView s_subject = new TextView(getActivity());
+                                s_subject.setText(death.getSubject());
+                                s_subject.setTextSize(dp2px(7));
+                                s_subject.setTypeface(tf_goth);
+                                parent_deaths.addView(s_subject);
+                                TextView s_death = new TextView(getActivity());
+                                s_death.setText(death.getEvent());
+                                s_death.setTextSize(dp2px(7));
+                                s_death.setTypeface(tf_goth);
+                                parent_deaths.addView(s_death);
+                                if(!(death.getLinks() == null)){
+                                    TextView useful = new TextView(getActivity());
+                                    useful.setText("Полезные ссылки");
+                                    useful.setTextSize(dp2px(6));
+                                    useful.setTypeface(tf_goth);
+                                    parent_deaths.addView(useful);
+                                    for(Link link : death.getLinks()){
+                                        LinearLayout parent = new LinearLayout(getActivity());
+                                        parent.setOrientation(LinearLayout.HORIZONTAL);
+                                        TextView namelink = new TextView(getActivity());
+                                        namelink.setTextSize(dp2px(7));
+                                        namelink.setTypeface(tf_gill);
+                                        namelink.setText(link.getName());
+                                        parent.addView(namelink);
 
-
-                            if(!(death.getLinks() == null)){
-                                TextView useful = new TextView(getActivity());
-                                useful.setText("Полезные ссылки");
-                                useful.setTextSize(dp2px(7));
-                                useful.setTypeface(tf_goth);
-                                forlinks.addView(useful);
-                                for(Link link : death.getLinks()){
-                                    LinearLayout parent = new LinearLayout(getActivity());
-                                    parent.setOrientation(LinearLayout.HORIZONTAL);
-                                    TextView namelink = new TextView(getActivity());
-                                    namelink.setTextSize(dp2px(7));
-                                    namelink.setTypeface(tf_gill);
-                                    namelink.setText(link.getName());
-                                    parent.addView(namelink);
-
-                                    ImageButton button = new ImageButton(getActivity());
-                                    button.setImageResource(android.R.drawable.ic_menu_view);
-                                    button.setOnClickListener(view1 -> {
-                                        Uri uri_vk = Uri.parse(link.getLink());
-                                        Intent intent_v = new Intent(Intent.ACTION_VIEW, uri_vk);
-                                        startActivity(intent_v);
-                                    });
-                                    parent.addView(button);
-                                    forlinks.addView(parent);
+                                        ImageButton button = new ImageButton(getActivity());
+                                        button.setImageResource(android.R.drawable.ic_menu_view);
+                                        button.setOnClickListener(view1 -> {
+                                            Uri uri_vk = Uri.parse(link.getLink());
+                                            Intent intent_v = new Intent(Intent.ACTION_VIEW, uri_vk);
+                                            startActivity(intent_v);
+                                        });
+                                        parent.addView(button);
+                                        parent_deaths.addView(parent);
+                                    }
                                 }
+                                View line = new View(getActivity());
+                                LinearLayout.LayoutParams lines = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp2px(1));
+                                line.setBackgroundResource(R.color.black);
+                                line.setLayoutParams(lines);
+                                parent_deaths.addView(line);
                             }
+                            delete.setVisibility(View.VISIBLE);
+                            delete.setClickable(true);
+                            delete.setText("Удалить");
+                            delete.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    DialogFragment d = new delete_death_fragment();
+                                    Bundle a = new Bundle();
+                                    a.putLong("DATETODELETE",dateClicked.getTime());
+                                    a.putStringArrayList("DEATHLIST", death_list);
+                                    a.putStringArrayList("KEYSLIST", keys_to_deaths);
+                                    d.setArguments(a);
+                                    d.show(getActivity().getSupportFragmentManager(),"what");
+                                    delete.setClickable(false);
+                                }
+                            });
                         }
 
                         @Override
@@ -196,6 +208,9 @@ public class death_calendar_fragment extends Fragment {
 
                         }
                     });
+                }else{
+                    delete.setVisibility(View.INVISIBLE);
+                    delete.setClickable(false);
                 }
 
             }
@@ -205,41 +220,6 @@ public class death_calendar_fragment extends Fragment {
                 this_month.setText(dateFormat.format(firstDayOfNewMonth));
             }
         });
-//            @Override
-//            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int m, int dayOfMonth) {
-//                int month = m + 1;
-//                Log.e("Selected day is",String.valueOf(month) + "/" + String.valueOf(dayOfMonth));
-//                LinearLayout links = getActivity().findViewById(R.id.for_links);
-//                myRef.child("116").addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                            Death d = dataSnapshot.getValue(Death.class);
-//                            if(month==12){
-//                                String n = "Билеты";
-//                                String l = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-//                                Link link = new Link(n,l);
-//                                myRef.child("116").push();}
-//                            if (d.getDate().equals(String.valueOf(month) + "/" + String.valueOf(dayOfMonth))) {
-//                                subject.setText(d.getSubject());
-//                                event.setText(d.getEvent());
-//                                for(Link l : d.getLinks()){
-//                                event.setText(l.getLink());}
-//                                links.setVisibility(View.VISIBLE);
-//                            }else{
-//                                links.setVisibility(View.INVISIBLE);
-//                                subject.setText("Ничего нет");
-//                                event.setText("Отдыхай (ботай)");
-//                            }
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//                    }
-//                });
-//            }
-//        });
     }
 
     private int dp2px(int dp) {

@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -27,6 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class edit_fragment extends Fragment {
@@ -41,7 +43,7 @@ public class edit_fragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         preferences = getActivity().getApplicationContext().getSharedPreferences("com.example.tablehomework", Context.MODE_PRIVATE);
         group = preferences.getString("enter","denied");
-        myRef = database.getReference().child("testtable").child(group).child("timetable");
+        myRef = database.getReference().child("testtable").child(group);
         return inflater.inflate(R.layout.fragment_edit, container, false);
     }
 
@@ -50,12 +52,26 @@ public class edit_fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         TextView current_homework = requireView().findViewById(R.id.current_homework);
         Spinner spinner = requireView().findViewById(R.id.subject_spinner);
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot ds) {
+                //Fill spinner
+                ArrayList<String> arrayList = new ArrayList<>();
+                for (DataSnapshot snap : ds.child("link").getChildren()) {
+                    arrayList.add(snap.getKey());
+                }
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, arrayList);
+                spinner.setAdapter(arrayAdapter);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                myRef.addValueEventListener(new ValueEventListener() {
+                myRef.child("timetable").addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    public void onDataChange(@NonNull DataSnapshot snapshot){
                         String[] path = {null,null};
                         Calendar calendar = Calendar.getInstance();
                         calendar.setFirstDayOfWeek(Calendar.SUNDAY);
